@@ -36,7 +36,7 @@ class Botao extends Component{
 
   render() {
     return (
-      <TouchableOpacity style={this.styles.area} >
+      <TouchableOpacity style={this.styles.area} onPress={this.props.onPress} >
         <Text style={this.styles.text} >{this.props.n}</Text>
       </TouchableOpacity>
     );
@@ -49,6 +49,27 @@ export default class AppCalculadora extends Component {
   constructor(props){
     super(props);
     this.state = {r:'0'};
+
+    this.btn = this.btn.bind(this);
+  }
+
+  btn(b){
+    let s = this.state;
+    if(b == 'C'){
+      s.r = '0';
+    }
+    else if(b =='='){
+      s.r = eval(s.r);
+    }
+    else{
+      if(s.r == '0'){
+        s.r = b;
+      } else{
+        s.r += b;
+      }
+    }
+
+    this.setState(s);
   }
 
   render() {
@@ -58,31 +79,31 @@ export default class AppCalculadora extends Component {
             <Text style={styles.res} >{this.state.r}</Text>
           </View>
           <View style={styles.linha} >
-            <Botao c="3" n="C" bg='#CCCCCC' />
-            <Botao n="/" bg='#FD9526' />
+            <Botao c="3" n="C" bg='#CCCCCC' onPress={()=>{this.btn("C")}} />
+            <Botao n="/" bg='#FD9526' onPress={()=>{this.btn("/")}} />
           </View>
           <View style={styles.linha} >
-            <Botao n="7" />
-            <Botao n="8" />
-            <Botao n="9" />
-            <Botao n="*" bg='#FD9526' />
+            <Botao n="7" onPress={()=>{this.btn("7")}} />
+            <Botao n="8" onPress={()=>{this.btn("8")}} />
+            <Botao n="9" onPress={()=>{this.btn("9")}} />
+            <Botao n="*" bg='#FD9526' onPress={()=>{this.btn("*")}} />
           </View>
           <View style={styles.linha} >
-            <Botao n="4" />
-            <Botao n="5" />
-            <Botao n="6" />
-            <Botao n="-" bg='#FD9526' />
+            <Botao n="4" onPress={()=>{this.btn("4")}} />
+            <Botao n="5" onPress={()=>{this.btn("5")}} />
+            <Botao n="6" onPress={()=>{this.btn("6")}} />
+            <Botao n="-" bg='#FD9526' onPress={()=>{this.btn("-")}} />
           </View>
           <View style={styles.linha} >
-            <Botao n="1" />
-            <Botao n="2" />
-            <Botao n="3" />
-            <Botao n="+" bg='#FD9526' />
+            <Botao n="1" onPress={()=>{this.btn("1")}} />
+            <Botao n="2" onPress={()=>{this.btn("2")}} />
+            <Botao n="3" onPress={()=>{this.btn("3")}} />
+            <Botao n="+" bg='#FD9526' onPress={()=>{this.btn("+")}} />
           </View>
           <View style={styles.linha} >
-            <Botao c="2" n="0" />
-            <Botao n="." />
-            <Botao n="=" bg='#FD9526' />
+            <Botao c="2" n="0" onPress={()=>{this.btn("0")}} />
+            <Botao n="." onPress={()=>{this.btn(".")}} />
+            <Botao n="=" bg='#FD9526' onPress={()=>{this.btn("=")}} />
           </View>
       </View>
     );
