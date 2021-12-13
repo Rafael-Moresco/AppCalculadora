@@ -46,11 +46,16 @@ class Botao extends Component{
 
 export default class AppCalculadora extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {r:'0'};
+  }
+
   render() {
     return (
       <View style={styles.body} >
         <View style={styles.linha} >
-            <Text></Text>
+            <Text style={styles.res} >{this.state.r}</Text>
           </View>
           <View style={styles.linha} >
             <Botao c="3" n="C" bg='#CCCCCC' />
@@ -92,5 +97,12 @@ const styles = StyleSheet.create({
   linha:{
     flex:1,
     flexDirection:'row'
+  },
+  res:{
+    backgroundColor:'#000000',
+    color:'#FFFFFF',
+    fontSize:50,
+    flex:1,
+    textAlign:'right'
   }
 });
